@@ -7,6 +7,8 @@ Please visit [VE2ZAZ's Website]( http://ve2zaz.net/Si5351_Synth/index.htm) for m
 
 The software allows to configure the Si5351A/C Synthesizer chip when supervised by the Arduino Nano. Once the Arduino has received a configuration from this software, it will re-load the Si5351 chip with that same configuration at every power up or reset. The Arduino sketch (installed and properly configured by this software) is required as the Si5351 chip does not retain its configuration when power is removed; it must be re-configured at power up.
 
+This software, along with all accompanying files and scripts, is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
+
 ## Computer software (python scripts)
 The software is written in Python 2.7 programming language. Thus it is fully compatible with the Linux and Windows (7, 8, 10) operating systems. Although it has not been tested, the software should also run properly on the Mac OS.
 
@@ -18,7 +20,7 @@ Obviously, the accompanying Arduino firmware (sketch) must be used in conjunctio
 
 Access must be granted to the computer's virtual serial port associated with the Arduino's serial-USB adapter, otherwise an error message will be displayed.
 
-This software is “Free software” (as defined by the Free Software Foundation), which means it respects users' freedom and community. The users have the freedom to run, copy, distribute, study, change and improve this software. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
 
 ## Arduino firmware (sketch)
 The Arduino firmware (a.k.a. the sketch) is written to be compiled in the Arduino IDE environment. The Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library (https://github.com/etherkit/Si5351Arduino). That library must be installed in the Arduino IDE via the Library Manager (Menu: Sketch -> Include Library -> Manage Libraries...) prior to compiling and transferring the sketch to the Arduino.
