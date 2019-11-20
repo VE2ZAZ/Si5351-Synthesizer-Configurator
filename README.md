@@ -20,8 +20,6 @@ Obviously, the accompanying Arduino firmware (sketch) must be used in conjunctio
 
 Access must be granted to the computer's virtual serial port associated with the Arduino's serial-USB adapter, otherwise an error message will be displayed.
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
-
 ## Arduino firmware (sketch)
 The Arduino firmware (a.k.a. the sketch) is written to be compiled in the Arduino IDE environment. The Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library (https://github.com/etherkit/Si5351Arduino). That library must be installed in the Arduino IDE via the Library Manager (Menu: Sketch -> Include Library -> Manage Libraries...) prior to compiling and transferring the sketch to the Arduino.
 
