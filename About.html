@@ -1,12 +1,12 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2019-04-24T16:13:36.033483786"/>
-	<style type="text/css">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta name="generator" content="LibreOffice 6.0.7.3 (Linux)">
+    <meta name="created" content="00:00:00">
+    <meta name="changed" content="2019-04-24T16:13:36.033483786">
+    <style type="text/css">
 		@page { margin: 0.79in }
 		p { margin-bottom: 0.1in; line-height: 115% }
 		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt }
@@ -17,251 +17,344 @@
 		h4.ctl { font-family: "Lohit Devanagari"; font-size: 13pt; font-style: italic }
 		a:link { so-language: zxx }
 	</style>
-</head>
-<body lang="en-US" bgcolor="#e6e6fa" dir="ltr">
-<p align="center" style="margin-top: 0.17in; margin-bottom: 0.08in; line-height: 100%; page-break-after: avoid">
-<font color="#0066b3"><font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 22pt"><b>Si5351A/B/C
-Configuration Software</b></font></font></font></p>
-<p align="center" style="margin-top: 0.04in; margin-bottom: 0.08in; line-height: 100%; page-break-after: avoid">
-<font face="Liberation Sans, sans-serif"><font size="4" style="font-size: 14pt">Version
-0.3, April 2019<br/>
-by Bert-VE2ZAZ, (http://ve2zaz.net)</font></font></p>
-<h2 class="western">Description</h2>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">This
-software allows to configure Silicon Laboratories Si5351A/B/C
-Synthesizer chips when supervised by an Arduino Uno or Nano board.
-Once the Arduino has received a configuration from this software, it
-will re-load the Si5351 chip with that same configuration at every
-power up or reset. The Arduino (properly configured by this software)
-is required as the Si5351 chip does not retain its configuration when
-power is removed; it must be re-configured at power up.</font></p>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-software is written in Python 2.7 programming language. Thus it is
-fully compatible with the Linux and Windows (7, 8, 10) operating
-systems. Although it has not been tested, the software should also
-run properly on the Mac OS. </font>
-</p>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">This
-software covers a superset of functions offered by the Si5351 family
-of chips. The user must understand the limits imposed by the Si5351
-model (A, B or C), such as the number of channels available or the
-support for an external reference input. A good comprehension of the
-Silicon Labs' Si5351A/B/C Datasheet document is recommended.</font></p>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">This
-software was designed with the objective of exploiting the most
-common Si5351 features. Thus, it allows to configure the chip for
-most applications, but not all of them. Examples of features that are
-not implemented are VCXO support, phase adjustment (other than simple
-inversion) and support for output channels 6 and 7. In an application
-where one or more of the missing features is required, the user can
-still use the proposed hardware by programming the Arduino Nano using
-the &quot;Raw data Transfer&quot; program. That Python script is
-included along with this one. In such case, various Si5351 registers
-will need to be programmed separately, which is more tedious.</font></p>
-<h2 class="western">Pre-requisites</h2>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">An
-	accompanying Arduino software (sketch) must be used in conjunction
-	with this software, otherwise the latter will not function. </font>
-	</p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library
-	(<a href="https://github.com/etherkit/Si5351Arduino">https://github.com/etherkit/Si5351Arduino</a>).
-	That library must be installed in the Arduino IDE via the Library
-	Manager (Menu: Sketch -&gt; Include Library -&gt; Manage
-	Libraries...).</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Access
-	must be granted to the virtual serial port associated with the
-	Arduino's serial-USB adapter, otherwise an error message will be
-	displayed.</font></p>
-</ul>
-<h4 class="western">Windows</h4>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	Python 2.7.x environment must be installed in Windows prior to
-	executing this Python script. Download the proper MSI Installer from
-	<a href="https://www.python.org/download/releases/2.7/">https://www.python.org/download/releases/2.7/</a>
-	and run it. It is recommended that you leave the installed software
-	location as suggested: &quot;</font><font face="DejaVu Sans Mono, monospace">C:\Python27</font><font face="Liberation Sans, sans-serif">&quot;.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	PySerial (Python Serial) library is required to run this software.
-	The best way to add it is to follow the instructions detailed on the
-	Adafruit website:
-	<a href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detector/installing-python-and-pyserial">https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detector/installing-python-and-pyserial</a>
-	. That PySerial installation folder is also included with this
-	sortware; this will save time and eliminate the need to download and
-	un-archive the tar.gz file. In a nutshell, change the path
-	environment variable to add the <br/>
-&quot;C:\Python27&quot; path,
-	open a command prompt window, change directory to the supplied
-	PySerial folder, and execute the &quot;</font><font face="DejaVu Sans Mono, monospace">python
-	setup.py install</font><font face="Liberation Sans, sans-serif">&quot;
-	command.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	proper Arduino USB-Serial virtual port driver must be installed
-	prior to using this software. This is normally the case with Windows
-	versions prior to Windows 10. Note that this driver is typically
-	installed during the Arduino IDE installation.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Once
-	the above requirements are met, executing this script is just a
-	matter of double-clicking on the .py file. If the script window does
-	not show up, launch the script from a command prompt window: change
-	directory to the script directory and issue the &quot;<font face="DejaVu Sans Mono, monospace">python
-	______.py</font>&quot; command (replace “<font face="DejaVu Sans Mono, monospace">______</font>”
-	with the exact script name). An error message should reveal the
-	nature of the problem.</font></p>
-</ul>
-<h4 class="western">Linux</h4>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Most
-	Linux distributions include the Python 2.7.x environment. So there
-	is no need to install Python.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	PySerial (Python Serial) library is required to run this software.
-	The easiest way to install the PySerial library is to install it
-	from the Linux package manager (apt, zypp, yum, etc.). For
-	Debian-based distributions (Debian, Ubuntu, mint, elementary,
-	Zorin), execute the following commands at a terminal window:</font></p>
-</ul>
-<p style="margin-left: 0.98in; margin-bottom: 0in; line-height: 100%">
-<font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
-<p style="margin-left: 0.98in; margin-bottom: 0in; line-height: 100%">
-<font face="DejaVu Sans Mono, monospace">sudo apt-get install
-python-serial</font></p>
-<ul>
-	<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">An
-	alternate way is to install it from the downloaded installation
-	folder. That PySerial installation folder is also included with this
-	software; this will save time and eliminate the need to download and
-	un-archive the tar.gz file. In a nutshell, open a terminal window,
-	change directory to the supplied PySerial folder, and execute the
-	&quot;</font><font face="DejaVu Sans Mono, monospace">sudo python
-	setup.py install</font><font face="Liberation Sans, sans-serif">&quot;
-	command.</font></p>
-</ul>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	Tkinter window library must also be installed. Install it from the
-	Linux package manager (apt, zypp, yum, etc.). For Debian-based
-	distributions (Debian, Ubuntu, mint, elementary, Zorin), execute the
-	following commands at a terminal window:</font></p>
-</ul>
-<p style="margin-left: 0.98in; margin-bottom: 0in; line-height: 100%">
-<font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
-<p style="margin-left: 0.98in; margin-bottom: 0in; line-height: 100%">
-<font face="DejaVu Sans Mono, monospace">sudo apt-get install
-python-tk</font></p>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	Arduino USB-Serial virtual port driver is typically included with
-	most Linux distributions. The Arduino Nano virtual port should
-	automatically be detected.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Once
-	the above requirements are met, executing this script is just a
-	matter of launching the script from a console window: change
-	directory to the script directory and issue the &quot;<font face="DejaVu Sans Mono, monospace">python
-	______.py</font>&quot; command (replace “<font face="DejaVu Sans Mono, monospace">______</font>”
-	with the exact script name). If the script window does not show up,
-	an error message should reveal the nature of the problem.</font></p>
-</ul>
-<h2 class="western">Operation</h2>
-<ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">All
-	frequencies must be entered in Hertz, for example 24.4 MHz is
-	entered as &quot;24400000&quot;.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Input
-	Reference Selection: The Si-5351 synthesizer must be configured to
-	retrieve its timebase from one of the possible input clocks. </font>
-	</p>
-	<ul>
-		<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">If
-		a Si-5351</font><font face="Liberation Sans, sans-serif"><b>C</b></font>
-		<font face="Liberation Sans, sans-serif">is used, the &quot;Input
-		Select&quot; can be:</font></p>
-		<ul>
-			<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">an
-			external reference (With a corresponding &quot;Input Frequency&quot;
-			ranging from 10000000 Hz to 40000000 Hz), or</font></p>
-			<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">the
-			onboard crystal (&quot;Input Frequency&quot; must be set to
-			25000000 Hz, or alternately to 27000000 Hz). </font>
-			</p>
-		</ul>
-		<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">With
-		an Si-5351<b>A</b>, the &quot;Input Select&quot; must be the
-		onboard crystal and the &quot;Input Frequency&quot; must be
-		25000000 Hz or 27000000 Hz.</font></p>
-	</ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	invert checkbox, when checked, will produce a clock signal on the
-	corresponding output channel that is 180 degrees out of phase
-	compared to the channels that are not inverted.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	Output Drive pull-down menu selects the drive strength (the current)
-	that the corresponding output will push its output with. The
-	selection will have some impact on the output power. Typical power
-	numbers at 10 MHz are: 2mA -&gt; +2.3 dBm, 4mA -&gt; +7.3 dBm, 6mA
-	-&gt; +9.6 dBm, 8mA -&gt; +10.8 dBm.</font></p>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Serial
-	Port Configuration</font></p>
-	<ul>
-		<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Windows:
-		The syntax used in the Serial Port field is &quot;COMx&quot;, for
-		example &quot;COM6&quot;. The user shall find out which COM port is
-		associated with the USB-serial adapter on the Arduino board by
-		consulting the Windows Device Manager or the Arduino IDE (Menu:
-		Tools -&gt; Port).</font></p>
-		<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">Linux:
-		The syntax used in the Serial Port field is &quot;/dev/ttyUSBx&quot;,
-		for example &quot;/dev/ttyUSB0&quot;. The user shall find out which
-		serial port is associated with the USB-serial adapter on the
-		Arduino board by consulting the &quot;/dev&quot; device directory,
-		or the Arduino IDE (Menu: Tools -&gt; Port).</font></p>
-	</ul>
-	<li/>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">The
-	software saves the various field values and the window position in a
-	text file named &quot;saved_settings.cfg&quot; in the same directory
-	as the Python script. This is performed at program exit. Reloading
-	of the field values is done at program launch by reading the file.
-	The absence of that file in the directory will force the program to
-	revert to default values at program launch. </font>
-	</p>
-</ul>
-<h2 class="western">Legal Notice</h2>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">This
-software is “Free software” (as defined by the Free Software
-Foundation), which means it respects users' freedom and community.
-The users have the freedom to run, copy, distribute, study, change
-and improve this software. </font>
-</p>
-<h2 class="western">Note 
-</h2>
-<p style="margin-bottom: 0in; line-height: 100%"><font face="Liberation Sans, sans-serif">This
-text is extracted from the About.html file provided with this
-software.</font></p>
-</body>
+  </head>
+  <body dir="ltr" bgcolor="#e6e6fa" lang="en-US">
+    <p style="margin-top: 0.17in; margin-bottom: 0.08in; line-height:
+      100%; page-break-after: avoid" align="center">
+      <font color="#0066b3"><font face="Liberation Sans, sans-serif"><font
+            style="font-size: 22pt" size="6"><b>Si5351A/B/C
+              Configuration Software</b></font></font></font></p>
+    <p style="margin-top: 0.04in; margin-bottom: 0.08in; line-height:
+      100%; page-break-after: avoid" align="center">
+      <font face="Liberation Sans, sans-serif"><font style="font-size:
+          14pt" size="4">Version
+          0.3, April 2019<br>
+          by Bert-VE2ZAZ, (http://ve2zaz.net)</font></font></p>
+    <h2 class="western">Description</h2>
+    <p style="margin-bottom: 0in; line-height: 100%"><font
+        face="Liberation Sans, sans-serif">This
+        software allows to configure Silicon Laboratories Si5351A/B/C
+        Synthesizer chips when supervised by an Arduino Uno or Nano
+        board.
+        Once the Arduino has received a configuration from this
+        software, it
+        will re-load the Si5351 chip with that same configuration at
+        every
+        power up or reset. The Arduino (properly configured by this
+        software)
+        is required as the Si5351 chip does not retain its configuration
+        when
+        power is removed; it must be re-configured at power up.</font></p>
+    <p style="margin-bottom: 0in; line-height: 100%"><font
+        face="Liberation Sans, sans-serif">The
+        software is written in Python 2.7 programming language. Thus it
+        is
+        fully compatible with the Linux and Windows (7, 8, 10) operating
+        systems. Although it has not been tested, the software should
+        also
+        run properly on the Mac OS. </font>
+    </p>
+    <p style="margin-bottom: 0in; line-height: 100%"><font
+        face="Liberation Sans, sans-serif">This
+        software covers a superset of functions offered by the Si5351
+        family
+        of chips. The user must understand the limits imposed by the
+        Si5351
+        model (A, B or C), such as the number of channels available or
+        the
+        support for an external reference input. A good comprehension of
+        the
+        Silicon Labs' Si5351A/B/C Datasheet document is recommended.</font></p>
+    <p style="margin-bottom: 0in; line-height: 100%"><font
+        face="Liberation Sans, sans-serif">This
+        software was designed with the objective of exploiting the most
+        common Si5351 features. Thus, it allows to configure the chip
+        for
+        most applications, but not all of them. Examples of features
+        that are
+        not implemented are VCXO support, phase adjustment (other than
+        simple
+        inversion) and support for output channels 6 and 7. In an
+        application
+        where one or more of the missing features is required, the user
+        can
+        still use the proposed hardware by programming the Arduino Nano
+        using
+        the "Raw data Transfer" program. That Python script is
+        included along with this one. In such case, various Si5351
+        registers
+        will need to be programmed separately, which is more tedious.</font></p>
+    <h2 class="western">Pre-requisites</h2>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">An accompanying Arduino
+            software (sketch) must be used in conjunction with this
+            software, otherwise the latter will not function. </font> </p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The Arduino sketch uses
+            Jason Mildrum's Etherkit Si5351Arduino library (<a
+              href="https://github.com/etherkit/Si5351Arduino">https://github.com/etherkit/Si5351Arduino</a>).
+
+            That library must be installed in the Arduino IDE via the
+            Library Manager (Menu: Sketch -&gt; Include Library -&gt;
+            Manage Libraries...).</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Access must be granted to
+            the virtual serial port associated with the Arduino's
+            serial-USB adapter, otherwise an error message will be
+            displayed.</font></p>
+      </li>
+    </ul>
+    <h4 class="western">Windows</h4>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The Python 2.7.x
+            environment must be installed in Windows prior to executing
+            this Python script. Download the proper MSI Installer from <a
+              href="https://www.python.org/download/releases/2.7/">https://www.python.org/download/releases/2.7/</a>
+            and run it. It is recommended that you leave the installed
+            software location as suggested: "</font><font face="DejaVu
+            Sans Mono, monospace">C:\Python27</font><font
+            face="Liberation Sans, sans-serif">".</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The PySerial (Python
+            Serial) library is required to run this software. The best
+            way to add it is to follow the instructions detailed on the
+            Adafruit website: <a
+href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detector/installing-python-and-pyserial">https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detector/installing-python-and-pyserial</a>
+            . That PySerial installation folder is also included with
+            this sortware; this will save time and eliminate the need to
+            download and un-archive the tar.gz file. In a nutshell,
+            change the path environment variable to add the <br>
+            "C:\Python27" path, open a command prompt window, change
+            directory to the supplied PySerial folder, and execute the "</font><font
+            face="DejaVu Sans Mono, monospace">python setup.py install</font><font
+            face="Liberation Sans, sans-serif">" command.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The proper Arduino
+            USB-Serial virtual port driver must be installed prior to
+            using this software. This is normally the case with Windows
+            versions prior to Windows 10. Note that this driver is
+            typically installed during the Arduino IDE installation.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Once the above
+            requirements are met, executing this script is just a matter
+            of double-clicking on the .py file. If the script window
+            does not show up, launch the script from a command prompt
+            window: change directory to the script directory and issue
+            the "<font face="DejaVu Sans Mono, monospace">python
+              ______.py</font>" command (replace “<font face="DejaVu
+              Sans Mono, monospace">______</font>” with the exact script
+            name). An error message should reveal the nature of the
+            problem.</font></p>
+      </li>
+    </ul>
+    <h4 class="western">Linux</h4>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Most Linux distributions
+            include the Python 2.7.x environment. So there is no need to
+            install Python.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The PySerial (Python
+            Serial) library is required to run this software. The
+            easiest way to install the PySerial library is to install it
+            from the Linux package manager (apt, zypp, yum, etc.). For
+            Debian-based distributions (Debian, Ubuntu, mint,
+            elementary, Zorin), execute the following commands at a
+            terminal window:</font></p>
+      </li>
+    </ul>
+    <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
+      100%">
+      <font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
+    <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
+      100%">
+      <font face="DejaVu Sans Mono, monospace">sudo apt-get install
+        python-serial</font></p>
+    <ul>
+      <p style="margin-bottom: 0in; line-height: 100%"><font
+          face="Liberation Sans, sans-serif">An alternate way is to
+          install it from the downloaded installation folder. That
+          PySerial installation folder is also included with this
+          software; this will save time and eliminate the need to
+          download and un-archive the tar.gz file. In a nutshell, open a
+          terminal window, change directory to the supplied PySerial
+          folder, and execute the "</font><font face="DejaVu Sans Mono,
+          monospace">sudo python setup.py install</font><font
+          face="Liberation Sans, sans-serif">" command.</font></p>
+    </ul>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The Tkinter window
+            library must also be installed. Install it from the Linux
+            package manager (apt, zypp, yum, etc.). For Debian-based
+            distributions (Debian, Ubuntu, mint, elementary, Zorin),
+            execute the following commands at a terminal window:</font></p>
+      </li>
+    </ul>
+    <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
+      100%">
+      <font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
+    <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
+      100%">
+      <font face="DejaVu Sans Mono, monospace">sudo apt-get install
+        python-tk</font></p>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The Arduino USB-Serial
+            virtual port driver is typically included with most Linux
+            distributions. The Arduino Nano virtual port should
+            automatically be detected.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Once the above
+            requirements are met, executing this script is just a matter
+            of launching the script from a console window: change
+            directory to the script directory and issue the "<font
+              face="DejaVu Sans Mono, monospace">python ______.py</font>"
+            command (replace “<font face="DejaVu Sans Mono, monospace">______</font>”
+            with the exact script name). If the script window does not
+            show up, an error message should reveal the nature of the
+            problem.</font></p>
+      </li>
+    </ul>
+    <h2 class="western">Operation</h2>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">All frequencies must be
+            entered in Hertz, for example 24.4 MHz is entered as
+            "24400000".</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Input Reference
+            Selection: The Si-5351 synthesizer must be configured to
+            retrieve its timebase from one of the possible input clocks.
+          </font> </p>
+        <ul>
+          <li>
+            <p style="margin-bottom: 0in; line-height: 100%"><font
+                face="Liberation Sans, sans-serif">If a Si-5351</font><font
+                face="Liberation Sans, sans-serif"><b>C</b></font> <font
+                face="Liberation Sans, sans-serif">is used, the "Input
+                Select" can be:</font></p>
+            <ul>
+              <li>
+                <p style="margin-bottom: 0in; line-height: 100%"><font
+                    face="Liberation Sans, sans-serif">an external
+                    reference (With a corresponding "Input Frequency"
+                    ranging from 10000000 Hz to 40000000 Hz), or</font></p>
+              </li>
+              <li>
+                <p style="margin-bottom: 0in; line-height: 100%"><font
+                    face="Liberation Sans, sans-serif">the onboard
+                    crystal ("Input Frequency" must be set to 25000000
+                    Hz, or alternately to 27000000 Hz). </font> </p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p style="margin-bottom: 0in; line-height: 100%"><font
+                face="Liberation Sans, sans-serif">With an Si-5351<b>A</b>,
+                the "Input Select" must be the onboard crystal and the
+                "Input Frequency" must be 25000000 Hz or 27000000 Hz.</font></p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The invert checkbox, when
+            checked, will produce a clock signal on the corresponding
+            output channel that is 180 degrees out of phase compared to
+            the channels that are not inverted.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The Output Drive
+            pull-down menu selects the drive strength (the current) that
+            the corresponding output will push its output with. The
+            selection will have some impact on the output power. Typical
+            power numbers at 10 MHz are: 2mA -&gt; +2.3 dBm, 4mA -&gt;
+            +7.3 dBm, 6mA -&gt; +9.6 dBm, 8mA -&gt; +10.8 dBm.</font></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">Serial Port Configuration</font></p>
+        <ul>
+          <li>
+            <p style="margin-bottom: 0in; line-height: 100%"><font
+                face="Liberation Sans, sans-serif">Windows: The syntax
+                used in the Serial Port field is "COMx", for example
+                "COM6". The user shall find out which COM port is
+                associated with the USB-serial adapter on the Arduino
+                board by consulting the Windows Device Manager or the
+                Arduino IDE (Menu: Tools -&gt; Port).</font></p>
+          </li>
+          <li>
+            <p style="margin-bottom: 0in; line-height: 100%"><font
+                face="Liberation Sans, sans-serif">Linux: The syntax
+                used in the Serial Port field is "/dev/ttyUSBx", for
+                example "/dev/ttyUSB0". The user shall find out which
+                serial port is associated with the USB-serial adapter on
+                the Arduino board by consulting the "/dev" device
+                directory, or the Arduino IDE (Menu: Tools -&gt; Port).</font></p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in; line-height: 100%"><font
+            face="Liberation Sans, sans-serif">The software saves the
+            various field values and the window position in a text file
+            named "saved_settings.cfg" in the same directory as the
+            Python script. This is performed at program exit. Reloading
+            of the field values is done at program launch by reading the
+            file. The absence of that file in the directory will force
+            the program to revert to default values at program launch. </font>
+        </p>
+      </li>
+    </ul>
+    <h2 class="western">Legal Notice</h2>
+    <p>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      This software, along with all accompanying files and scripts, is
+      free software: you can redistribute it and/or modify it under the
+      terms of the GNU General Public License as published by the Free
+      Software Foundation, either version 3 of the License, or any later
+      version. This program is distributed in the hope that it will be
+      useful, but WITHOUT ANY WARRANTY; without even the implied
+      warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details. You should
+      have received a copy of the GNU General Public License along with
+      this program. If not, see <a href="https://www.gnu.org/licenses/"
+        rel="nofollow">https://www.gnu.org/licenses/</a>. When modifying
+      the software, a mention of the original author, namely
+      Bert-VE2ZAZ, would be a gracious consideration.</p>
+    <p style="margin-bottom: 0in; line-height: 100%">
+    </p>
+    <h2 class="western">Note </h2>
+    <p style="margin-bottom: 0in; line-height: 100%"><font
+        face="Liberation Sans, sans-serif">This
+        text is extracted from the About.html file provided with this
+        software.</font></p>
+  </body>
 </html>
