@@ -21,6 +21,6 @@ Access must be granted to the computer's virtual serial port associated with the
 This software is “Free software” (as defined by the Free Software Foundation), which means it respects users' freedom and community. The users have the freedom to run, copy, distribute, study, change and improve this software. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
 
 ## Arduino firmware (sketch)
-The Arduino firmware (a.k.a. the sketch) is written to be compiled in the Arduino IDE environment. The Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library (https://github.com/etherkit/Si5351Arduino). That library must be installed in the Arduino IDE via the Library Manager (Menu: Sketch -> Include Library -> Manage Libraries...) prior to compiling the sketch.
+The Arduino firmware (a.k.a. the sketch) is written to be compiled in the Arduino IDE environment. The Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library (https://github.com/etherkit/Si5351Arduino). That library must be installed in the Arduino IDE via the Library Manager (Menu: Sketch -> Include Library -> Manage Libraries...) prior to compiling and transferring the sketch to the Arduino.
 
-The Arduino must be sent an Si5351 configuration from the software described below, otherwise the synthesizer board will not operate.
+The Arduino must be sent an Si5351 configuration from the software described above, otherwise the synthesizer board will not operate.
