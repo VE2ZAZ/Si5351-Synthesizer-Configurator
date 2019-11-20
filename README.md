@@ -7,6 +7,7 @@ Please visit [VE2ZAZ's Website]( http://ve2zaz.net/Si5351_Synth/index.htm) for m
 
 The software allows to configure the Si5351A/C Synthesizer chip when supervised by the Arduino Nano. Once the Arduino has received a configuration from this software, it will re-load the Si5351 chip with that same configuration at every power up or reset. The Arduino (properly configured by this software) is required as the Si5351 chip does not retain its configuration when power is removed; it must be re-configured at power up.
 
+## Computer software (python scripts)
 The software is written in Python 2.7 programming language. Thus it is fully compatible with the Linux and Windows (7, 8, 10) operating systems. Although it has not been tested, the software should also run properly on the Mac OS.
 
 The software covers a superset of features offered by the Si5351 family of chips. The user must understand the limits imposed by the Si5351 model (A or C version), such as the number of channels available or the support for an external reference input. A good comprehension of the Silicon Labs' Si5351 Datasheet document is recommended.
@@ -18,3 +19,8 @@ Obviously, the accompanying Arduino firmware (sketch) must be used in conjunctio
 Access must be granted to the computer's virtual serial port associated with the Arduino's serial-USB adapter, otherwise an error message will be displayed.
 
 This software is “Free software” (as defined by the Free Software Foundation), which means it respects users' freedom and community. The users have the freedom to run, copy, distribute, study, change and improve this software. When modifying the software, a mention of the original author, namely Bert-VE2ZAZ, would be a gracious consideration.
+
+## Arduino firmware (sketch)
+The Arduino firmware (a.k.a. the sketch) is written to be compiled in the Arduino IDE environment. The Arduino sketch uses Jason Mildrum's Etherkit Si5351Arduino library (https://github.com/etherkit/Si5351Arduino). That library must be installed in the Arduino IDE via the Library Manager (Menu: Sketch -> Include Library -> Manage Libraries...) prior to compiling the sketch.
+
+The Arduino must be sent an Si5351 configuration from the software described below, otherwise the synthesizer board will not operate.
