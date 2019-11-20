@@ -5,7 +5,7 @@ Please see the [About.html]( http://htmlpreview.github.com/?https://github.com/V
 
 Please visit [VE2ZAZ's Website]( http://ve2zaz.net/Si5351_Synth/index.htm) for more information on the VE2ZAZ Si5351 Synthesizer board hardware.
 
-The software allows to configure the Si5351A/C Synthesizer chip when supervised by the Arduino Nano. Once the Arduino has received a configuration from this software, it will re-load the Si5351 chip with that same configuration at every power up or reset. The Arduino (properly configured by this software) is required as the Si5351 chip does not retain its configuration when power is removed; it must be re-configured at power up.
+The software allows to configure the Si5351A/C Synthesizer chip when supervised by the Arduino Nano. Once the Arduino has received a configuration from this software, it will re-load the Si5351 chip with that same configuration at every power up or reset. The Arduino sketch (installed and properly configured by this software) is required as the Si5351 chip does not retain its configuration when power is removed; it must be re-configured at power up.
 
 ## Computer software (python scripts)
 The software is written in Python 2.7 programming language. Thus it is fully compatible with the Linux and Windows (7, 8, 10) operating systems. Although it has not been tested, the software should also run properly on the Mac OS.
