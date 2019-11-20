@@ -1,0 +1,61 @@
+; This example of configuration data sets up a 10.000 MHz output on channel 0
+; using the onboard 25 MHz crystal. For more information, consult Si5351
+; AN-619 application note.
+; More information on this file's syntax is available when you click
+; on the "About..." button.
+;
+; Proposed a, b and c parameters required on MSNA and MS0 registers
+; 
+; 25 MHz x 30
+; -----------  = 10 MHz
+;     75
+; 
+; MSNA
+; ----
+; a=30, b=0, c=1  ->   MSNA_P1 = (128 x 30) - 512 = 3328 = 0x0D00
+;                      MSNA_P2 = 0
+;                      MSNA_P3 = 1
+; MS0
+; ---
+; a=75, b=0, c=1  ->   MS0_P1 = (128 x 75) - 512 = 9088 = 0x2380
+;                      MS0_P2 = 0
+;                      MS0_P3 = 1
+;
+;-----------------------------------------------------------------
+; Actual register writes begin here
+;
+3,255;		Turn off all outputs
+;	Power down all 8 output drivers
+16,8;
+17,8;
+18,8;
+19,8;
+20,8;
+21,8;
+22,8;
+23,8;
+;	Write new configuration
+15,0;		PLL Input Source
+9,255;		OEB Pin Enable Control Mask
+16,12;		CLK0 Control
+26,0;		Multisynth NA Parameter MSNA_P3[15:8]
+27,1;		Multisynth NA Parameter MSNA_P3[7:0]
+28,0;		Multisynth NA Parameter MSNA_P1[17:16]
+29,13;		Multisynth NA Parameter MSNA_P1[15:8]
+30,0;		Multisynth NA Parameter MSNA_P1[7:0]
+31,0;		Multisynth NA Parameters MSNA_P3[19:16] MSNA_P2[19:16]
+32,0;		Multisynth NA Parameter MSNA_P2[15:18]
+33,0;		Multisynth NA Parameter MSNA_P2[7:0]
+42,0;		Multisynth0 Parameter MS0_P3[15:8]
+43,1;		Multisynth0 Parameter MS0_P3[7:0]
+44,0;		Multisynth0 Parameters R0, DIVBY4, MS0_P1[17:16]
+45,35;		Multisynth0 Parameter MS0_P1[15:8]
+46,128;		Multisynth0 Parameter MS0_P1[7:0]
+47,0;		Multisynth0 Parameters MS0_P3[19:16] MS0_P2[19:16]
+48,0;		Multisynth0 Parameter MS0_P2[15:8]
+49,0;		Multisynth0 Parameter MS0_P2[7:0]
+187,64;		Fanout Enable of the XO for passthrough fallback
+177,32;		PLL Reset Suggested to write 0xAC  
+3,254;		Power up output 0 driver
+;
+; End of Configuration data
