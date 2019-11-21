@@ -3,7 +3,7 @@ Software and firmware required to configure the Si5351 chip via an Arduino Nano 
 
 Please see the [About.html]( http://htmlpreview.github.com/?https://github.com/VE2ZAZ/Si5351_Synthesizer_Configurator/About.html) and the [About_Raw.html]( http://htmlpreview.github.com/?https://github.com/VE2ZAZ/Si5351_Synthesizer_Configurator/About_Raw.html) files for all the details on this software package.
 
-Please visit [VE2ZAZ's Website]( http://ve2zaz.net/Si5351_Synth/index.htm) for more information on the VE2ZAZ Si5351 Synthesizer board hardware.
+Please visit [VE2ZAZ's Website]( http://ve2zaz.net/Si5351_Synth/Si5351_Synth.htm) for more information on the VE2ZAZ Si5351 Synthesizer board hardware.
 
 The software allows to configure the Si5351A/C Synthesizer chip when supervised by the Arduino Nano. Once the Arduino has received a configuration from this software, it will re-load the Si5351 chip with that same configuration at every power up or reset. The Arduino sketch (installed and properly configured by this software) is required as the Si5351 chip does not retain its configuration when power is removed; it must be re-configured at power up.
 
