@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # Designed for Python 2.7
 
+# Version 0.5
+
 import sys
 import os
 import serial 				# Pyserial
@@ -189,9 +191,6 @@ def Transfer_Button_Toggle():
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK4)  + "," + str(Out_Inv_check_Value_4.get())
 			print(TxStr)
 			ser.write(TxStr + "|")
-			TxStr = PLL_RESET + "," + str(SI5351_CLK4)	
-			print(TxStr)
-			ser.write(TxStr + "|")
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 5 configuration
 		if Out_check_Value_5.get() == 1:		
@@ -205,6 +204,9 @@ def Transfer_Button_Toggle():
 			print(TxStr)
 			ser.write(TxStr + "|")
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
+                TxStr = PLL_RESET + "," + str(SI5351_PLLA)	# New to version 0.5 Required to ensure proper phase alignment between the outputs.
+                print(TxStr)
+                ser.write(TxStr + "|")
 		ser.write("%")		# This character signals the end of parameter transmission
 		while ser.out_waiting !=0: pass		# Wait for all characters to be transmitted
 		if ser.read(1) == 'O':		successMsg("\nConfiguration data received by processor")
@@ -624,7 +626,7 @@ except ValueError:
 
 canvas.pack()  # Refreshes the canvas text
 
-successMsg("Welcome to the Si5351A/B/C Synthesizer Configuration Software, by Bert-VE2ZAZ, Version 0.3, April 2019. http://ve2zaz.net")
+successMsg("Welcome to the Si5351A/B/C Synthesizer Configuration Software, by Bert-VE2ZAZ, Version 0.5, Décembre 2019. http://ve2zaz.net")
 successMsg("\nPlease note that the settings shown are retrieved from the last session, not from the ATmega processor EEPROM.")
 
 # Calls the Exit function when the window "X" icon (upper-right corner) is clicked
