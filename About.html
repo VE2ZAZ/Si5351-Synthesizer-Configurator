@@ -20,70 +20,53 @@
   </head>
   <body dir="ltr" bgcolor="#e6e6fa" lang="en-US">
     <p style="margin-top: 0.17in; margin-bottom: 0.08in; line-height:
-      100%; page-break-after: avoid" align="center">
-      <font color="#0066b3"><font face="Liberation Sans, sans-serif"><font
+      100%; page-break-after: avoid" align="center"> <font
+        color="#0066b3"><font face="Liberation Sans, sans-serif"><font
             style="font-size: 22pt" size="6"><b>Si5351A/B/C
               Configuration Software</b></font></font></font></p>
     <p style="margin-top: 0.04in; margin-bottom: 0.08in; line-height:
-      100%; page-break-after: avoid" align="center">
-      <font face="Liberation Sans, sans-serif"><font style="font-size:
-          14pt" size="4">Version
-          0.3, April 2019<br>
+      100%; page-break-after: avoid" align="center"> <font
+        face="Liberation Sans, sans-serif"><font style="font-size: 14pt"
+          size="4">Version 0.6, August 2021<br>
           by Bert-VE2ZAZ, (http://ve2zaz.net)</font></font></p>
     <h2 class="western">Description</h2>
     <p style="margin-bottom: 0in; line-height: 100%"><font
-        face="Liberation Sans, sans-serif">This
-        software allows to configure Silicon Laboratories Si5351A/B/C
-        Synthesizer chips when supervised by an Arduino Uno or Nano
-        board.
-        Once the Arduino has received a configuration from this
-        software, it
-        will re-load the Si5351 chip with that same configuration at
-        every
+        face="Liberation Sans, sans-serif">This software allows to
+        configure Silicon Laboratories Si5351A/B/C Synthesizer chips
+        when supervised by an Arduino Uno or Nano board. Once the
+        Arduino has received a configuration from this software, it will
+        re-load the Si5351 chip with that same configuration at every
         power up or reset. The Arduino (properly configured by this
-        software)
-        is required as the Si5351 chip does not retain its configuration
-        when
-        power is removed; it must be re-configured at power up.</font></p>
+        software) is required as the Si5351 chip does not retain its
+        configuration when power is removed; it must be re-configured at
+        power up.</font></p>
     <p style="margin-bottom: 0in; line-height: 100%"><font
-        face="Liberation Sans, sans-serif">The
-        software is written in Python 2.7 programming language. Thus it
-        is
-        fully compatible with the Linux and Windows (7, 8, 10) operating
-        systems. Although it has not been tested, the software should
-        also
-        run properly on the Mac OS. </font>
-    </p>
+        face="Liberation Sans, sans-serif">The software is written in
+        Python 3.8 programming language. Thus it is fully compatible
+        with the Linux and Windows (7, 8, 10) operating systems.
+        Although it has not been tested, the software should also run
+        properly on the Mac OS. Note: A python 2.7 version of this
+        software is also provided in this package.</font> </p>
     <p style="margin-bottom: 0in; line-height: 100%"><font
-        face="Liberation Sans, sans-serif">This
-        software covers a superset of functions offered by the Si5351
-        family
-        of chips. The user must understand the limits imposed by the
-        Si5351
-        model (A, B or C), such as the number of channels available or
-        the
-        support for an external reference input. A good comprehension of
-        the
+        face="Liberation Sans, sans-serif">This software covers a
+        superset of functions offered by the Si5351 family of chips. The
+        user must understand the limits imposed by the Si5351 model (A,
+        B or C), such as the number of channels available or the support
+        for an external reference input. A good comprehension of the
         Silicon Labs' Si5351A/B/C Datasheet document is recommended.</font></p>
     <p style="margin-bottom: 0in; line-height: 100%"><font
-        face="Liberation Sans, sans-serif">This
-        software was designed with the objective of exploiting the most
-        common Si5351 features. Thus, it allows to configure the chip
-        for
-        most applications, but not all of them. Examples of features
-        that are
+        face="Liberation Sans, sans-serif">This software was designed
+        with the objective of exploiting the most common Si5351
+        features. Thus, it allows to configure the chip for most
+        applications, but not all of them. Examples of features that are
         not implemented are VCXO support, phase adjustment (other than
-        simple
-        inversion) and support for output channels 6 and 7. In an
-        application
-        where one or more of the missing features is required, the user
-        can
-        still use the proposed hardware by programming the Arduino Nano
-        using
-        the "Raw data Transfer" program. That Python script is
-        included along with this one. In such case, various Si5351
-        registers
-        will need to be programmed separately, which is more tedious.</font></p>
+        simple inversion) and support for output channels 6 and 7. In an
+        application where one or more of the missing features is
+        required, the user can still use the proposed hardware by
+        programming the Arduino Nano using the "Raw data Transfer"
+        program. That Python script is included along with this one. In
+        such case, various Si5351 registers will need to be programmed
+        separately, which is more tedious.</font></p>
     <h2 class="western">Pre-requisites</h2>
     <ul>
       <li>
@@ -97,6 +80,7 @@
             face="Liberation Sans, sans-serif">The Arduino sketch uses
             Jason Mildrum's Etherkit Si5351Arduino library (<a
               href="https://github.com/etherkit/Si5351Arduino">https://github.com/etherkit/Si5351Arduino</a>).
+
 
             That library must be installed in the Arduino IDE via the
             Library Manager (Menu: Sketch -&gt; Include Library -&gt;
@@ -114,14 +98,15 @@
     <ul>
       <li>
         <p style="margin-bottom: 0in; line-height: 100%"><font
-            face="Liberation Sans, sans-serif">The Python 2.7.x
-            environment must be installed in Windows prior to executing
-            this Python script. Download the proper MSI Installer from <a
-              href="https://www.python.org/download/releases/2.7/">https://www.python.org/download/releases/2.7/</a>
+            face="Liberation Sans, sans-serif">The Python 3 environment
+            must be installed in Windows prior to executing this Python
+            script. Download the proper MSI Installer from <a
+              href="https://www.python.org/download/releases/2.7/">https://www.python.org/download/</a>
             and run it. It is recommended that you leave the installed
             software location as suggested: "</font><font face="DejaVu
-            Sans Mono, monospace">C:\Python27</font><font
-            face="Liberation Sans, sans-serif">".</font></p>
+            Sans Mono, monospace">C:\Python<font face="Liberation Sans,
+              sans-serif">3<i>x</i></font></font><font face="Liberation
+            Sans, sans-serif">".</font></p>
       </li>
       <li>
         <p style="margin-bottom: 0in; line-height: 100%"><font
@@ -134,10 +119,11 @@ href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detect
             this sortware; this will save time and eliminate the need to
             download and un-archive the tar.gz file. In a nutshell,
             change the path environment variable to add the <br>
-            "C:\Python27" path, open a command prompt window, change
-            directory to the supplied PySerial folder, and execute the "</font><font
-            face="DejaVu Sans Mono, monospace">python setup.py install</font><font
-            face="Liberation Sans, sans-serif">" command.</font></p>
+            "C:\Python3<i>x</i>" path, open a command prompt window,
+            change directory to the supplied PySerial folder, and
+            execute the "</font><font face="DejaVu Sans Mono, monospace">python
+            setup.py install</font><font face="Liberation Sans,
+            sans-serif">" command.</font></p>
       </li>
       <li>
         <p style="margin-bottom: 0in; line-height: 100%"><font
@@ -166,7 +152,7 @@ href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detect
       <li>
         <p style="margin-bottom: 0in; line-height: 100%"><font
             face="Liberation Sans, sans-serif">Most Linux distributions
-            include the Python 2.7.x environment. So there is no need to
+            include the Python 3 environment. So there is no need to
             install Python.</font></p>
       </li>
       <li>
@@ -181,12 +167,11 @@ href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detect
       </li>
     </ul>
     <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
-      100%">
-      <font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
+      100%"> <font face="DejaVu Sans Mono, monospace">sudo apt-get
+        update</font></p>
     <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
-      100%">
-      <font face="DejaVu Sans Mono, monospace">sudo apt-get install
-        python-serial</font></p>
+      100%"> <font face="DejaVu Sans Mono, monospace">sudo apt-get
+        install python-serial</font></p>
     <ul>
       <p style="margin-bottom: 0in; line-height: 100%"><font
           face="Liberation Sans, sans-serif">An alternate way is to
@@ -210,12 +195,11 @@ href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detect
       </li>
     </ul>
     <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
-      100%">
-      <font face="DejaVu Sans Mono, monospace">sudo apt-get update</font></p>
+      100%"> <font face="DejaVu Sans Mono, monospace">sudo apt-get
+        update</font></p>
     <p style="margin-left: 0.98in; margin-bottom: 0in; line-height:
-      100%">
-      <font face="DejaVu Sans Mono, monospace">sudo apt-get install
-        python-tk</font></p>
+      100%"> <font face="DejaVu Sans Mono, monospace">sudo apt-get
+        install python3-tk</font></p>
     <ul>
       <li>
         <p style="margin-bottom: 0in; line-height: 100%"><font
@@ -349,12 +333,10 @@ href="https://learn.adafruit.com/arduino-lesson-17-email-sending-movement-detect
         rel="nofollow">https://www.gnu.org/licenses/</a>. When modifying
       the software, a mention of the original author, namely
       Bert-VE2ZAZ, would be a gracious consideration.</p>
-    <p style="margin-bottom: 0in; line-height: 100%">
-    </p>
+    <p style="margin-bottom: 0in; line-height: 100%"> </p>
     <h2 class="western">Note </h2>
     <p style="margin-bottom: 0in; line-height: 100%"><font
-        face="Liberation Sans, sans-serif">This
-        text is extracted from the About.html file provided with this
-        software.</font></p>
+        face="Liberation Sans, sans-serif">This text is extracted from
+        the About.html file provided with this software.</font></p>
   </body>
 </html>

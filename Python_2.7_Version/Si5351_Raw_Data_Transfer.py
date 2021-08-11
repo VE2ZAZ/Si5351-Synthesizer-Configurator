@@ -1,15 +1,14 @@
 #!/usr/bin/python -d
 # -*- coding: utf-8 -*-
-# Designed for Python 3
+# Designed for Python 2
 
-# Version 0.4   Migrated to Python 3
 
 import sys
 import os
 import serial # Pyserial
-from tkinter import *   #Tkinter   # Permet la création de fenêtres et de widgets
+from Tkinter import *      # Permet la création de fenêtres et de widgets
 #from tkFileDialog   import askopenfilename
-import tkinter.messagebox # tkMessageBox
+import tkMessageBox
 import time
 import platform
 import base64
@@ -51,7 +50,7 @@ def Bascule_Bouton_About():
 def Bascule_Bouton_Transfert():
 	global ser
 	Bouton_Transfert.config(state=DISABLED)
-	time.sleep(0.1)
+ 	time.sleep(0.1)
  	
 	# Validation du contenu
 	TempText = DataBox.get("1.0",'end-1c').splitlines(1)   # split the lines and removes the "\n"
@@ -79,30 +78,30 @@ def Bascule_Bouton_Transfert():
 		ser.port = str(Serial_Port_Value.get())	# 
 		ser.open()			# Attention! Génère un Reset de l'Arduino via la broche DTR
 		ser.flushInput()
-		if ser.read(1) == b'R':	successMsg("\nProcessor reset completed")
+		if ser.read(1) == 'R':	successMsg("\nProcessor reset completed")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation of the ATmega processor reset completion. Verify \n 1- proper processor board programming \n 2- proper USB connectivity to the processor board")
 			return
 		# Transmission des donnees
-		ser.write(("@").encode());		# Signale le début de l'envoi des paramètres raw
+		ser.write("@");		# Signale le début de l'envoi des paramètres raw
 		for line in TempText:
 			if str(line[0]) == ";" or str(line[0]) == "\n": pass
 			else: 
 				line_params = line.replace(';',',').split(",")	# cree un array de chaines de caracteres en unicodes
 				print(str(line_params[0])+ "," + str(line_params[1]) + ";")
-				ser.write((str(line_params[0])+ "," + str(line_params[1]) + ";").encode());		# il faut retirer les unicodes.		
+				ser.write(str(line_params[0])+ "," + str(line_params[1]) + ";");		# il faut retirer les unicodes.		
 				time.sleep(0.05)			# Pause requise pour que l'Arduino gobe les caractères avant que son Rx buffer soit plein
-		ser.write(("%").encode())		# Envoyer un caractere de fin d'envoi
+		ser.write("%")		# Envoyer un caractere de fin d'envoi
 		while ser.out_waiting !=0: pass
-		if ser.read(1) == b'O':		successMsg("\nConfiguration data received by processor")
+		if ser.read(1) == 'O':		successMsg("\nConfiguration data received by processor")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the ATmega processor received the configuration data. Try again...")
 			return
-		if ser.read(1) == b'E':		successMsg("\nConfiguration saved to the ATmega processor EEPROM")
+		if ser.read(1) == 'E':		successMsg("\nConfiguration saved to the ATmega processor EEPROM")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the configuration data was saved to the ATmega processor EEPROM. Try again...")
 			return
-		if ser.read(1) == b'S':		successMsg("\nConfiguration data transferred from the ATmega processor to the Si5351")
+		if ser.read(1) == 'S':		successMsg("\nConfiguration data transferred from the ATmega processor to the Si5351")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the configuration data transferred from the ATmega processor to the Si5351. Try again...")
 			return
@@ -234,7 +233,7 @@ except ValueError:
 
 canvas.pack()  # Important pour rafraichir tout le text
 
-successMsg("Welcome to the Si5351A/B/C Raw Data Transfer Software, by by Bert-VE2ZAZ, Version 0.4, August 2021. http://ve2zaz.net")
+successMsg("Welcome to the Si5351A/B/C Raw Data Transfer Software, by by Bert-VE2ZAZ, Version 0.3, April 2019. http://ve2zaz.net")
 successMsg("\nPlease note that the settings shown are retrieved from the last session, not from the ATmega processor EEPROM.")
 
 #Fenetre_Princ.protocol("WM_DELETE_WINDOW", Bascule_Bouton_Sortie)
