@@ -1,14 +1,14 @@
 #!/usr/bin/python -d
 # -*- coding: utf-8 -*-
-# Designed for Python 2.7
+# Designed for Python 3
 
-# Version 0.5
+# Version 0.6   Migrated to Python 3
 
 import sys
 import os
 import serial 				# Pyserial
-from Tkinter import *      	# Allows creation of windows and widgets
-import tkMessageBox
+from tkinter import *    #Tkinter  	# Allows creation of windows and widgets
+import tkinter.messagebox  # tkMessageBox
 import time
 import platform
 import base64
@@ -91,7 +91,7 @@ def Transfer_Button_Toggle():
 		ErrMsg("\nError! One or more of the entry fields contain non-numerals or is not preperly formatted. Please correct...")
 		return		
 	successMsg("\n-----------------------------------------\nConfiguration Transfer Initiated...")
- 	time.sleep(0.1)
+	time.sleep(0.1)
 	# USB (Serial) Port opening.
 	port_error = False
 	try:		# Test to make sure that the serial port exists and that it is accessible.
@@ -107,117 +107,119 @@ def Transfer_Button_Toggle():
 		ser.port = str(Serial_Port_Value.get())	# 
 		ser.open()			# Caution! Opening the port generates an Arduino Reset via the serial port's DTR pin
 		ser.flushInput()
-		if ser.read(1) == 'R':	successMsg("\nProcessor reset completed")
+#		TEST = ser.read(1)
+#		print(TEST)      
+		if ser.read(1) == b'R':	successMsg("\nProcessor reset completed")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation of the ATmega processor reset completion. Verify \n 1- proper processor board programming \n 2- proper USB connectivity to the processor board")
 			return
-		ser.write("$");		# Character that signals the beginning of the parameter transmission string
+		ser.write(b"$");		# Character that signals the beginning of the parameter transmission string
 		# Configure the crystal
 		TxStr = INIT + "," + str(SI5351_CRYSTAL_LOAD_0PF) + "," + str(Ref_Freq_Value.get()) + "," + str(Ref_Freq_Corr_Value.get()*1000)
 		print(TxStr)
-		ser.write(TxStr + "|")
+		ser.write((TxStr + "|").encode())
 		time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		if Input_Reference_choices[Pulldown_Input_Source_Value.get()] == 2:	# Configuration when the crystal is the timing source
 			TxStr = SET_PLL_INPUT + "," + str(SI5351_PLLA) + "," + str(SI5351_PLL_INPUT_XO)
 			print(TxStr)		
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 		if Input_Reference_choices[Pulldown_Input_Source_Value.get()] == 1: # Configuration when the external reference is the timing source
 			TxStr = SET_REF_FREQ + "," + str(Ref_Freq_Value.get()) + "," + str(SI5351_PLL_INPUT_CLKIN) 
 			print(TxStr)		
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CORRECTION + "," + str(Ref_Freq_Corr_Value.get()*1000) + "," + str(SI5351_PLL_INPUT_CLKIN)
 			print(TxStr)		
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_PLL_INPUT + "," + str(SI5351_PLLA) + "," + str(SI5351_PLL_INPUT_CLKIN)
 			print(TxStr)		
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 0 configuration
 		if Out_check_Value_0.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out0_freq_Value.get()*100)  + "," + str(SI5351_CLK0)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK0)  + "," + str(Pulldown0_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK0)  + "," + str(Out_Inv_check_Value_0.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 1 configuration
 		if Out_check_Value_1.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out1_freq_Value.get()*100)  + "," + str(SI5351_CLK1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK1)  + "," + str(Pulldown1_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK1)  + "," + str(Out_Inv_check_Value_1.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 2 configuration
 		if Out_check_Value_2.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out2_freq_Value.get()*100)  + "," + str(SI5351_CLK2)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK2)  + "," + str(Pulldown2_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK2)  + "," + str(Out_Inv_check_Value_2.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 3 configuration
 		if Out_check_Value_3.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out3_freq_Value.get()*100)  + "," + str(SI5351_CLK3)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK3)  + "," + str(Pulldown3_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK3)  + "," + str(Out_Inv_check_Value_3.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 4 configuration
 		if Out_check_Value_4.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out4_freq_Value.get()*100)  + "," + str(SI5351_CLK4)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK4)  + "," + str(Pulldown4_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK4)  + "," + str(Out_Inv_check_Value_4.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
 		# Output 5 configuration
 		if Out_check_Value_5.get() == 1:		
 			TxStr = SET_FREQ + "," + str(Out5_freq_Value.get()*100)  + "," + str(SI5351_CLK5)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = DRIVE_STRENGTH + "," + str(SI5351_CLK5)  + "," + str(Pulldown5_Value.get()/2 - 1)
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			TxStr = SET_CLOCK_INVERT + "," + str(SI5351_CLK5)  + "," + str(Out_Inv_check_Value_5.get())
 			print(TxStr)
-			ser.write(TxStr + "|")
+			ser.write((TxStr + "|").encode())
 			time.sleep(1)			# This Pause is required for the Arduino to swallow all the characters before its Rx buffer gets full	
-                TxStr = PLL_RESET + "," + str(SI5351_PLLA)	# New to version 0.5 Required to ensure proper phase alignment between the outputs.
-                print(TxStr)
-                ser.write(TxStr + "|")
-		ser.write("%")		# This character signals the end of parameter transmission
+			TxStr = PLL_RESET + "," + str(SI5351_PLLA)	# New to version 0.5 Required to ensure proper phase alignment between the outputs.
+			print(TxStr)
+			ser.write((TxStr + "|").encode())
+		ser.write(b"%")		# This character signals the end of parameter transmission
 		while ser.out_waiting !=0: pass		# Wait for all characters to be transmitted
-		if ser.read(1) == 'O':		successMsg("\nConfiguration data received by processor")
+		if ser.read(1) == b'O':		successMsg("\nConfiguration data received by processor")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the ATmega processor received the configuration data. Try again...")
 			return
-		if ser.read(1) == 'E':		successMsg("\nConfiguration saved to the ATmega processor EEPROM")
+		if ser.read(1) == b'E':		successMsg("\nConfiguration saved to the ATmega processor EEPROM")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the configuration data was saved to the ATmega processor EEPROM. Try again...")
 			return
-		if ser.read(1) == 'S':		successMsg("\nConfiguration data transferred from the ATmega processor to the Si5351")
+		if ser.read(1) == b'S':		successMsg("\nConfiguration data transferred from the ATmega processor to the Si5351")
 		else:
 			ErrMsg("\nError! Software did not receive confirmation that the configuration data transferred from the ATmega processor to the Si5351. Try again...")
 			return
@@ -626,7 +628,7 @@ except ValueError:
 
 canvas.pack()  # Refreshes the canvas text
 
-successMsg("Welcome to the Si5351A/B/C Synthesizer Configuration Software, by Bert-VE2ZAZ, Version 0.5, Décembre 2019. http://ve2zaz.net")
+successMsg("Welcome to the Si5351A/B/C Synthesizer Configuration Software, by Électro-Bidouilleur, Version 0.6, August 2021. http://bidouilleur.ca")
 successMsg("\nPlease note that the settings shown are retrieved from the last session, not from the ATmega processor EEPROM.")
 
 # Calls the Exit function when the window "X" icon (upper-right corner) is clicked
